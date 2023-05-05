@@ -55,7 +55,7 @@ void main() {
     }
 
     // Pass vertex texcoord onto the fragment shader
-    model_uv = uv;
+    model_uv = uv*texture_scale;
     // Transform and project vertex from 3D world-space to 2D screen-space
     gl_Position = projection * view * world * vec4(position, 1.0);
 }
