@@ -18,7 +18,7 @@ class Renderer {
                 scene: new Scene(this.engine),
                 background_color: new Color4(0.1, 0.1, 0.1, 1.0),
                 materials: null,
-                ground_subdivisions: [50, 50],
+                ground_subdivisions: [500, 500],
                 ground_mesh: null,
                 camera: null,
                 ambient: new Color3(0.2, 0.2, 0.2),
@@ -92,7 +92,7 @@ class Renderer {
 
         // Create ground mesh
         let white_texture = RawTexture.CreateRGBTexture(new Uint8Array([255, 255, 255]), 1, 1, scene);
-        let ground_heightmap = new Texture('/heightmaps/default.png', scene);
+        let ground_heightmap = new Texture('/heightmaps/new_height.jpeg', scene);
         ground_mesh.scaling = new Vector3(20.0, 1.0, 20.0);
         ground_mesh.metadata = {
             mat_color: new Color3(0.10, 0.65, 0.15),
