@@ -23,7 +23,7 @@ export default {
                            'camera_position', 'ambient', 'num_lights', 'light_positions', 'light_colors'],
                 samplers: ['mat_texture']
             });
-            basic_mat.backFaceCulling = true;
+            basic_mat.backFaceCulling = false;
             basic_mat.onBindObservable.add((mesh) => {
                 const shader = basic_mat.getEffect();
                 shader.setColor3('mat_color', mesh.metadata.mat_color);
@@ -86,7 +86,11 @@ export default {
 
             return ground;
         },
+        createBoatModel(name, subdivisions, scene){
+            //probably wont need to use subdivision
+            
 
+        },
         changeScene(event) {
             let scene_idx = parseInt(event.target.value.substring(5));
             this.renderer.setActiveScene(scene_idx);

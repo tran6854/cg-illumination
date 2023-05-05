@@ -18,7 +18,9 @@ uniform vec3 ambient; // Ia
 out vec4 FragColor;
 
 void main() {
-    vec3 model_color = mat_color * texture(mat_texture, model_uv).rgb;
+    vec3 model_color = mat_color * texture(mat_texture, model_uv).rgb; //ka & kd
+    model_color = (model_color * ambient) + (model_color * diffuse_illum) + (mat_specular * specular_illum);
+
     // Color
     FragColor = vec4(model_color, 1.0);
 }
