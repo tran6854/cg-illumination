@@ -55,7 +55,7 @@ class Renderer {
         this.scenes.forEach((scene, idx) => {
             scene.materials = material_callback(scene.scene);
             scene.ground_mesh = ground_mesh_callback(scene.scene, scene.ground_subdivisions);
-            this['createScene'+ idx](idx);
+            this['createScene' + idx](idx);
         });
     }
 
@@ -106,7 +106,7 @@ class Renderer {
         ground_mesh.material = materials['ground_' + this.shading_alg];
 
         // Create other models
-        let sphere = CreateSphere('sphere', {segments: 32}, scene);
+        let sphere = CreateSphere('sphere', { segments: 32 }, scene);
         sphere.position = new Vector3(1.0, 0.5, 3.0);
         sphere.metadata = {
             mat_color: new Color3(0.10, 0.35, 0.88),
@@ -117,9 +117,9 @@ class Renderer {
         }
         sphere.material = materials['illum_' + this.shading_alg];
         current_scene.models.push(sphere);
-        
-        
-        let box = CreateBox('box', {width: 2, height: 1, depth: 1}, scene);
+
+
+        let box = CreateBox('box', { width: 2, height: 1, depth: 1 }, scene);
         box.position = new Vector3(-1.0, 0.5, 2.0);
         box.metadata = {
             mat_color: new Color3(0.75, 0.15, 0.05),
@@ -129,47 +129,47 @@ class Renderer {
             texture_scale: new Vector2(1.0, 1.0)
         }
         box.material = materials['illum_' + this.shading_alg];
-       current_scene.models.push(box);
+        current_scene.models.push(box);
 
-       scene.onKeyboardObservable.add((kbInfo) => {
-        //current_scene.lights[this.active_light]
-        //console.log("Type: ", kbInfo.event.key);
-        switch (kbInfo.event.key)
-        {
-            case "a":
-                //translate negative x
-                current_scene.lights[this.active_light].position.x -= 0.5;
-                console.log("Hello from scene 0");
-                break;
-            case "d":
-                //translate positive x
-                current_scene.lights[this.active_light].position.x += 0.5;
-                break;
-            case "f":
-                //translate negative y
-                current_scene.lights[this.active_light].position.y -= 0.5;
-                break;
-            case "r":
-                //translate positive y
-                current_scene.lights[this.active_light].position.y += 0.5;
-                break;
-            case "w":
-                //translate negative z
-                current_scene.lights[this.active_light].position.z -= 0.5;
-                break;
-            case "s":
-                //translate positive z
-                current_scene.lights[this.active_light].position.z += 0.5;
-                break;
-        }
-      });
-
+        scene.onKeyboardObservable.add((kbInfo) => {
+            //current_scene.lights[this.active_light]
+            //console.log("Type: ", kbInfo.event.key);
+            if(this.active_scene == 0)
+            {
+                switch (kbInfo.event.key) {
+                    case "a":
+                        //translate negative x
+                        current_scene.lights[this.active_light].position.x -= 0.5;
+                        break;
+                    case "d":
+                        //translate positive x
+                        current_scene.lights[this.active_light].position.x += 0.5;
+                        break;
+                    case "f":
+                        //translate negative y
+                        current_scene.lights[this.active_light].position.y -= 0.5;
+                        break;
+                    case "r":
+                        //translate positive y
+                        current_scene.lights[this.active_light].position.y += 0.5;
+                        break;
+                    case "w":
+                        //translate negative z
+                        current_scene.lights[this.active_light].position.z -= 0.5;
+                        break;
+                    case "s":
+                        //translate positive z
+                        current_scene.lights[this.active_light].position.z += 0.5;
+                        break;
+                }
+            }
+        });
 
         // Animation function - called before each frame gets rendered
         scene.onBeforeRenderObservable.add(() => {
             // update models and lights here (if needed)
             // ...
-            
+
             // update uniforms in shader programs
             this.updateShaderUniforms(scene_idx, materials['illum_' + this.shading_alg]);
             this.updateShaderUniforms(scene_idx, materials['ground_' + this.shading_alg]);
@@ -233,7 +233,7 @@ class Renderer {
         ground_mesh.material = materials['ground_' + this.shading_alg];
 
         // Create other models
-        let sphere = CreateSphere('sphere', {diameter: 1.5, segments:22}, scene);
+        let sphere = CreateSphere('sphere', { diameter: 1.5, segments: 22 }, scene);
         sphere.position = new Vector3(-3, 1.5, -6.0);
         sphere.metadata = {
             mat_color: new Color3(0.60, 0.65, 0.0),
@@ -244,9 +244,9 @@ class Renderer {
         }
         sphere.material = materials['illum_' + this.shading_alg];
         current_scene.models.push(sphere);
-        
-        
-        let box = CreateCylinder('cylinder', {tessellation: 7, height: 2}, scene);
+
+
+        let box = CreateCylinder('cylinder', { tessellation: 7, height: 2 }, scene);
         box.position = new Vector3(-3, 0, -6.0);
         box.metadata = {
             mat_color: new Color3(0.75, 0.15, 0.05),
@@ -261,34 +261,36 @@ class Renderer {
         scene.onKeyboardObservable.add((kbInfo) => {
             //current_scene.lights[this.active_light]
             //console.log("Type: ", kbInfo.event.key);
-            switch (kbInfo.event.key)
+            if(this.active_scene == 1)
             {
-                case "a":
-                    //translate negative x
-                    current_scene.lights[this.active_light].position.x -= 0.5;
-                    break;
-                case "d":
-                    //translate positive x
-                    current_scene.lights[this.active_light].position.x += 0.5;
-                    break;
-                case "f":
-                    //translate negative y
-                    current_scene.lights[this.active_light].position.y -= 0.5;
-                    break;
-                case "r":
-                    //translate positive y
-                    current_scene.lights[this.active_light].position.y += 0.5;
-                    break;
-                case "w":
-                    //translate negative z
-                    current_scene.lights[this.active_light].position.z -= 0.5;
-                    break;
-                case "s":
-                    //translate positive z
-                    current_scene.lights[this.active_light].position.z += 0.5;
-                    break;
+                switch (kbInfo.event.key) {
+                    case "a":
+                        //translate negative x
+                        current_scene.lights[this.active_light].position.x -= 0.5;
+                        break;
+                    case "d":
+                        //translate positive x
+                        current_scene.lights[this.active_light].position.x += 0.5;
+                        break;
+                    case "f":
+                        //translate negative y
+                        current_scene.lights[this.active_light].position.y -= 0.5;
+                        break;
+                    case "r":
+                        //translate positive y
+                        current_scene.lights[this.active_light].position.y += 0.5;
+                        break;
+                    case "w":
+                        //translate negative z
+                        current_scene.lights[this.active_light].position.z -= 0.5;
+                        break;
+                    case "s":
+                        //translate positive z
+                        current_scene.lights[this.active_light].position.z += 0.5;
+                        break;
+                }
             }
-          });
+        });
 
         // let customMesh = new BABYLON.Mesh("custom", scene);
         // var positions = [-5, 2, -3, -7, -2, -3, -3, -2, -3, 5, 2, 3, 7, -2, 3, 3, -2, 3];
@@ -302,7 +304,7 @@ class Renderer {
         scene.onBeforeRenderObservable.add(() => {
             // update models and lights here (if needed)
             // ...
-            
+
             // update uniforms in shader programs
             this.updateShaderUniforms(scene_idx, materials['illum_' + this.shading_alg]);
             this.updateShaderUniforms(scene_idx, materials['ground_' + this.shading_alg]);
@@ -367,7 +369,7 @@ class Renderer {
         ground_mesh.material = materials['ground_' + this.shading_alg];
 
         // Create other models
-        let sphere = CreateSphere('sphere', {segments: 32}, scene);
+        let sphere = CreateSphere('sphere', { segments: 32 }, scene);
         sphere.position = new Vector3(1.0, 0.5, 3.0);
         sphere.metadata = {
             mat_color: new Color3(0.10, 0.35, 0.88),
@@ -378,9 +380,9 @@ class Renderer {
         }
         sphere.material = materials['illum_' + this.shading_alg];
         current_scene.models.push(sphere);
-        
-        
-        let box = CreateBox('box', {width: 2, height: 1, depth: 1}, scene);
+
+
+        let box = CreateBox('box', { width: 2, height: 1, depth: 1 }, scene);
         box.position = new Vector3(-1.0, 0.5, 2.0);
         box.metadata = {
             mat_color: new Color3(0.75, 0.15, 0.05),
@@ -390,45 +392,47 @@ class Renderer {
             texture_scale: new Vector2(1.0, 1.0)
         }
         box.material = materials['illum_' + this.shading_alg];
-       current_scene.models.push(box);
+        current_scene.models.push(box);
 
-       scene.onKeyboardObservable.add((kbInfo) => {
-        //current_scene.lights[this.active_light]
-        //console.log("Type: ", kbInfo.event.key);
-        switch (kbInfo.event.key)
-        {
-            case "a":
-                //translate negative x
-                current_scene.lights[this.active_light].position.x -= 0.5;
-                break;
-            case "d":
-                //translate positive x
-                current_scene.lights[this.active_light].position.x += 0.5;
-                break;
-            case "f":
-                //translate negative y
-                current_scene.lights[this.active_light].position.y -= 0.5;
-                break;
-            case "r":
-                //translate positive y
-                current_scene.lights[this.active_light].position.y += 0.5;
-                break;
-            case "w":
-                //translate negative z
-                current_scene.lights[this.active_light].position.z -= 0.5;
-                break;
-            case "s":
-                //translate positive z
-                current_scene.lights[this.active_light].position.z += 0.5;
-                break;
-        }
-      });
+        scene.onKeyboardObservable.add((kbInfo) => {
+            //current_scene.lights[this.active_light]
+            //console.log("Type: ", kbInfo.event.key);
+            if(this.active_scene == 2)
+            {
+                switch (kbInfo.event.key) {
+                    case "a":
+                        //translate negative x
+                        current_scene.lights[this.active_light].position.x -= 0.5;
+                        break;
+                    case "d":
+                        //translate positive x
+                        current_scene.lights[this.active_light].position.x += 0.5;
+                        break;
+                    case "f":
+                        //translate negative y
+                        current_scene.lights[this.active_light].position.y -= 0.5;
+                        break;
+                    case "r":
+                        //translate positive y
+                        current_scene.lights[this.active_light].position.y += 0.5;
+                        break;
+                    case "w":
+                        //translate negative z
+                        current_scene.lights[this.active_light].position.z -= 0.5;
+                        break;
+                    case "s":
+                        //translate positive z
+                        current_scene.lights[this.active_light].position.z += 0.5;
+                        break;
+                }
+            }
+        });
 
         // Animation function - called before each frame gets rendered
         scene.onBeforeRenderObservable.add(() => {
             // update models and lights here (if needed)
             // ...
-            
+
             // update uniforms in shader programs
             this.updateShaderUniforms(scene_idx, materials['illum_' + this.shading_alg]);
             this.updateShaderUniforms(scene_idx, materials['ground_' + this.shading_alg]);
@@ -453,7 +457,7 @@ class Renderer {
     getActiveScene() {
         return this.scenes[this.active_scene].scene;
     }
-    
+
     setActiveScene(idx) {
         this.active_scene = idx;
     }
@@ -480,7 +484,6 @@ class Renderer {
     }
 
     setActiveLight(idx) {
-        console.log(idx);
         this.active_light = idx;
     }
 }
