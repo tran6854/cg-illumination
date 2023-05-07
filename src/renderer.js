@@ -48,7 +48,7 @@ class Renderer {
                 models: []
             }
         ];
-        this.active_scene = 2;
+        this.active_scene = 0;
         this.active_light = 0;
         this.shading_alg = 'gouraud';
 
@@ -92,7 +92,7 @@ class Renderer {
 
         // Create ground mesh
         let white_texture = RawTexture.CreateRGBTexture(new Uint8Array([255, 255, 255]), 1, 1, scene);
-        let ground_heightmap = new Texture('/heightmaps/new_height.jpeg', scene);
+        let ground_heightmap = new Texture('/heightmaps/new_height.png', scene);
         ground_mesh.scaling = new Vector3(20.0, 1.0, 20.0);
         ground_mesh.metadata = {
             mat_color: new Color3(0.10, 0.65, 0.15),
@@ -130,6 +130,39 @@ class Renderer {
         }
         box.material = materials['illum_' + this.shading_alg];
        current_scene.models.push(box);
+
+       scene.onKeyboardObservable.add((kbInfo) => {
+        //current_scene.lights[this.active_light]
+        //console.log("Type: ", kbInfo.event.key);
+        switch (kbInfo.event.key)
+        {
+            case "a":
+                //translate negative x
+                current_scene.lights[this.active_light].position.x -= 0.5;
+                console.log("Hello from scene 0");
+                break;
+            case "d":
+                //translate positive x
+                current_scene.lights[this.active_light].position.x += 0.5;
+                break;
+            case "f":
+                //translate negative y
+                current_scene.lights[this.active_light].position.y -= 0.5;
+                break;
+            case "r":
+                //translate positive y
+                current_scene.lights[this.active_light].position.y += 0.5;
+                break;
+            case "w":
+                //translate negative z
+                current_scene.lights[this.active_light].position.z -= 0.5;
+                break;
+            case "s":
+                //translate positive z
+                current_scene.lights[this.active_light].position.z += 0.5;
+                break;
+        }
+      });
 
 
         // Animation function - called before each frame gets rendered
@@ -224,6 +257,38 @@ class Renderer {
         }
         box.material = materials['illum_' + this.shading_alg];
         current_scene.models.push(box);
+
+        scene.onKeyboardObservable.add((kbInfo) => {
+            //current_scene.lights[this.active_light]
+            //console.log("Type: ", kbInfo.event.key);
+            switch (kbInfo.event.key)
+            {
+                case "a":
+                    //translate negative x
+                    current_scene.lights[this.active_light].position.x -= 0.5;
+                    break;
+                case "d":
+                    //translate positive x
+                    current_scene.lights[this.active_light].position.x += 0.5;
+                    break;
+                case "f":
+                    //translate negative y
+                    current_scene.lights[this.active_light].position.y -= 0.5;
+                    break;
+                case "r":
+                    //translate positive y
+                    current_scene.lights[this.active_light].position.y += 0.5;
+                    break;
+                case "w":
+                    //translate negative z
+                    current_scene.lights[this.active_light].position.z -= 0.5;
+                    break;
+                case "s":
+                    //translate positive z
+                    current_scene.lights[this.active_light].position.z += 0.5;
+                    break;
+            }
+          });
 
         // let customMesh = new BABYLON.Mesh("custom", scene);
         // var positions = [-5, 2, -3, -7, -2, -3, -3, -2, -3, 5, 2, 3, 7, -2, 3, 3, -2, 3];
@@ -327,6 +392,37 @@ class Renderer {
         box.material = materials['illum_' + this.shading_alg];
        current_scene.models.push(box);
 
+       scene.onKeyboardObservable.add((kbInfo) => {
+        //current_scene.lights[this.active_light]
+        //console.log("Type: ", kbInfo.event.key);
+        switch (kbInfo.event.key)
+        {
+            case "a":
+                //translate negative x
+                current_scene.lights[this.active_light].position.x -= 0.5;
+                break;
+            case "d":
+                //translate positive x
+                current_scene.lights[this.active_light].position.x += 0.5;
+                break;
+            case "f":
+                //translate negative y
+                current_scene.lights[this.active_light].position.y -= 0.5;
+                break;
+            case "r":
+                //translate positive y
+                current_scene.lights[this.active_light].position.y += 0.5;
+                break;
+            case "w":
+                //translate negative z
+                current_scene.lights[this.active_light].position.z -= 0.5;
+                break;
+            case "s":
+                //translate positive z
+                current_scene.lights[this.active_light].position.z += 0.5;
+                break;
+        }
+      });
 
         // Animation function - called before each frame gets rendered
         scene.onBeforeRenderObservable.add(() => {
