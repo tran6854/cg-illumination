@@ -89,7 +89,6 @@ export default {
         createBoatModel(name, subdivisions, scene){
             //probably wont need to use subdivision
             
-
         },
         changeScene(event) {
             let scene_idx = parseInt(event.target.value.substring(5));

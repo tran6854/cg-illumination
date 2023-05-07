@@ -110,7 +110,7 @@ class Renderer {
         sphere.position = new Vector3(1.0, 0.5, 3.0);
         sphere.metadata = {
             mat_color: new Color3(0.10, 0.35, 0.88),
-            mat_texture: white_texture,
+            mat_texture: new Texture("/heightmaps/texture.png", scene),
             mat_specular: new Color3(0.8, 0.8, 0.8),
             mat_shininess: 16,
             texture_scale: new Vector2(1.0, 1.0)
@@ -122,8 +122,8 @@ class Renderer {
         let box = CreateBox('box', { width: 2, height: 1, depth: 1 }, scene);
         box.position = new Vector3(-1.0, 0.5, 2.0);
         box.metadata = {
-            mat_color: new Color3(0.75, 0.15, 0.05),
-            mat_texture: white_texture,
+            mat_color: new Color3(1.0, 1.0, 1.0),
+            mat_texture: new Texture("/heightmaps/brick.png", scene),
             mat_specular: new Color3(0.4, 0.4, 0.4),
             mat_shininess: 4,
             texture_scale: new Vector2(1.0, 1.0)
@@ -249,8 +249,8 @@ class Renderer {
         let box = CreateCylinder('cylinder', { tessellation: 7, height: 2 }, scene);
         box.position = new Vector3(-3, 0, -6.0);
         box.metadata = {
-            mat_color: new Color3(0.75, 0.15, 0.05),
-            mat_texture: white_texture,
+            mat_color: new Color3(0.75, 0.75, 0.75),
+            mat_texture: new Texture("/heightmaps/can.jpg", scene),
             mat_specular: new Color3(0.4, 0.4, 0.4),
             mat_shininess: 4,
             texture_scale: new Vector2(1.0, 1.0)
@@ -373,7 +373,7 @@ class Renderer {
         sphere.position = new Vector3(1.0, 0.5, 3.0);
         sphere.metadata = {
             mat_color: new Color3(0.10, 0.35, 0.88),
-            mat_texture: white_texture,
+            mat_texture: new Texture("/heightmaps/moon.jpg", scene),
             mat_specular: new Color3(0.8, 0.8, 0.8),
             mat_shininess: 16,
             texture_scale: new Vector2(1.0, 1.0)
@@ -386,7 +386,7 @@ class Renderer {
         box.position = new Vector3(-1.0, 0.5, 2.0);
         box.metadata = {
             mat_color: new Color3(0.75, 0.15, 0.05),
-            mat_texture: white_texture,
+            mat_texture: new Texture("/heightmaps/wavy.png", scene),
             mat_specular: new Color3(0.4, 0.4, 0.4),
             mat_shininess: 4,
             texture_scale: new Vector2(1.0, 1.0)
