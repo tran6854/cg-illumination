@@ -10,7 +10,7 @@ import { Vector2, Vector3 } from '@babylonjs/core/Maths/math.vector';
 import { CreateCylinder } from '@babylonjs/core';
 
 class Renderer {
-    constructor(canvas, engine, material_callback, ground_mesh_callback) {
+    constructor(canvas, engine, material_callback, ground_mesh_callback, boat_callback) {
         this.canvas = canvas;
         this.engine = engine;
         this.scenes = [
@@ -31,6 +31,7 @@ class Renderer {
                 materials: null,
                 ground_subdivisions: [50, 50, 50],
                 ground_mesh: null,
+                boat_mesh: null,
                 camera: null,
                 ambient: new Color3(0.32, 0.32, 0.42),
                 lights: [],
@@ -48,15 +49,17 @@ class Renderer {
                 models: []
             }
         ];
-        this.active_scene = 2;
+        this.active_scene = 1;
         this.active_light = 0;
         this.shading_alg = 'gouraud';
 
         this.scenes.forEach((scene, idx) => {
             scene.materials = material_callback(scene.scene);
+            this.scenes[1].boat_mesh = boat_callback(this.scenes[1].scene);
             scene.ground_mesh = ground_mesh_callback(scene.scene, scene.ground_subdivisions);
             this['createScene'+ idx](idx);
         });
+
     }
 
     createScene0(scene_idx) {
@@ -95,7 +98,7 @@ class Renderer {
         let ground_heightmap = new Texture('/heightmaps/default.png', scene);
         ground_mesh.scaling = new Vector3(20.0, 1.0, 20.0);
         ground_mesh.metadata = {
-            mat_color: new Color3(0.10, 0.65, 0.15),
+            mat_color: new Color3(0.10, 0.65, 0.15), //ccolor of ground
             mat_texture: white_texture,
             mat_specular: new Color3(0.0, 0.0, 0.0),
             mat_shininess: 1,
@@ -148,6 +151,7 @@ class Renderer {
         let scene = current_scene.scene;
         let materials = current_scene.materials;
         let ground_mesh = current_scene.ground_mesh;
+        let boat_mesh = current_scene.boat_mesh;
 
         // Set scene-wide / environment values
         scene.clearColor = current_scene.background_color;
@@ -199,6 +203,20 @@ class Renderer {
         }
         ground_mesh.material = materials['ground_' + this.shading_alg];
 
+        
+        // Create boat mesh
+        boat_mesh.scaling = new Vector3(20.0, 1.0, 20.0);
+        boat_mesh.metadata = {
+            mat_color: new Color3(0.60, 0.65, 0.15),
+            mat_texture: white_texture,
+            mat_specular: new Color3(0.3, 0.2, 0.5),
+            mat_shininess: 3,
+            texture_scale: new Vector2(1.0, 1.0),
+            height_scalar: 5.0
+        }
+        boat_mesh.material = materials['illum_' + this.shading_alg];
+
+
         // Create other models
         let sphere = CreateSphere('sphere', {diameter: 1.5, segments:22}, scene);
         sphere.position = new Vector3(-3, 1.5, -6.0);
@@ -224,14 +242,8 @@ class Renderer {
         }
         box.material = materials['illum_' + this.shading_alg];
         current_scene.models.push(box);
+        
 
-        // let customMesh = new BABYLON.Mesh("custom", scene);
-        // var positions = [-5, 2, -3, -7, -2, -3, -3, -2, -3, 5, 2, 3, 7, -2, 3, 3, -2, 3];
-        // var indices = [0, 1, 2, 3, 4, 5];
-        // var vertexData = new BABYLON.VertexData();
-        // vertexData.positions = positions;
-        // vertexData.indices = indices;
-        // vertexData.applyToMesh(customMesh);
 
         // Animation function - called before each frame gets rendered
         scene.onBeforeRenderObservable.add(() => {
@@ -291,7 +303,7 @@ class Renderer {
         let ground_heightmap = new Texture('/heightmaps/default.png', scene);
         ground_mesh.scaling = new Vector3(20.0, 1.0, 20.0);
         ground_mesh.metadata = {
-            mat_color: new Color3(0.10, 0.65, 0.15),
+            mat_color: new Color3(1.0, 1.0, 1.0),
             mat_texture: white_texture,
             mat_specular: new Color3(0.0, 0.0, 0.0),
             mat_shininess: 1,
