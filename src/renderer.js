@@ -9,6 +9,8 @@ import { Color3, Color4 } from '@babylonjs/core/Maths/math.color';
 import { Vector2, Vector3 } from '@babylonjs/core/Maths/math.vector';
 import { CreateCylinder } from '@babylonjs/core';
 
+const BASE_URL = import.meta.env.BASE_URL || '/';
+
 class Renderer {
     constructor(canvas, engine, material_callback, ground_mesh_callback, boat_callback) {
         this.canvas = canvas;
@@ -94,7 +96,7 @@ class Renderer {
 
         // Create ground mesh
         let white_texture = RawTexture.CreateRGBTexture(new Uint8Array([255, 255, 255]), 1, 1, scene);
-        let ground_heightmap = new Texture('/heightmaps/new_height.png', scene);
+        let ground_heightmap = new Texture(BASE_URL + '/heightmaps/new_height.png', scene);
         ground_mesh.scaling = new Vector3(20.0, 1.0, 20.0);
         ground_mesh.metadata = {
             mat_color: new Color3(0.10, 0.65, 0.15),
@@ -112,7 +114,7 @@ class Renderer {
         sphere.position = new Vector3(1.0, 0.5, 3.0);
         sphere.metadata = {
             mat_color: new Color3(0.10, 0.35, 0.88),
-            mat_texture: new Texture("/heightmaps/texture.png", scene),
+            mat_texture: new Texture(BASE_URL + "/heightmaps/texture.png", scene),
             mat_specular: new Color3(0.8, 0.8, 0.8),
             mat_shininess: 16,
             texture_scale: new Vector2(1.0, 1.0)
@@ -129,7 +131,7 @@ class Renderer {
         box.position = new Vector3(-1.0, 0.5, 2.0);
         box.metadata = {
             mat_color: new Color3(1.0, 1.0, 1.0),
-            mat_texture: new Texture("/heightmaps/brick.png", scene),
+            mat_texture: new Texture(BASE_URL + "/heightmaps/brick.png", scene),
             mat_specular: new Color3(0.4, 0.4, 0.4),
             mat_shininess: 4,
             texture_scale: new Vector2(1.0, 1.0)
@@ -225,7 +227,7 @@ class Renderer {
 
         // Create ground mesh
         let white_texture = RawTexture.CreateRGBTexture(new Uint8Array([255, 255, 255]), 1, 1, scene);
-        let ground_heightmap = new Texture('/heightmaps/default.png', scene);
+        let ground_heightmap = new Texture(BASE_URL + '/heightmaps/default.png', scene);
         ground_mesh.scaling = new Vector3(20.0, 1.0, 20.0);
         ground_mesh.metadata = {
             mat_color: new Color3(0.60, 0.65, 0.15),
@@ -257,7 +259,7 @@ class Renderer {
         sphere.position = new Vector3(1.0, 0.5, 3.0);
         sphere.metadata = {
             mat_color: new Color3(0.60, 0.65, 0.0),
-            mat_texture: new Texture("/heightmaps/moon.jpg", scene),
+            mat_texture: new Texture(BASE_URL + "/heightmaps/moon.jpg", scene),
             mat_specular: new Color3(0.8, 0.8, 0.8),
             mat_shininess: 2,
             texture_scale: new Vector2(1.0, 1.0)
@@ -270,7 +272,7 @@ class Renderer {
         box.position = new Vector3(-1.0, 0.5, 2.0);
         box.metadata = {
             mat_color: new Color3(0.75, 0.75, 0.75),
-            mat_texture: new Texture("/heightmaps/can.jpg", scene),
+            mat_texture: new Texture(BASE_URL + "/heightmaps/can.jpg", scene),
             mat_specular: new Color3(0.4, 0.4, 0.4),
             mat_shininess: 4,
             texture_scale: new Vector2(1.0, 1.0)
@@ -366,11 +368,11 @@ class Renderer {
 
         // Create ground mesh
         let white_texture = RawTexture.CreateRGBTexture(new Uint8Array([255, 255, 255]), 1, 1, scene);
-        let ground_heightmap = new Texture('/heightmaps/default.png', scene);
+        let ground_heightmap = new Texture(BASE_URL + '/heightmaps/default.png', scene);
         ground_mesh.scaling = new Vector3(20.0, 1.0, 20.0);
         ground_mesh.metadata = {
             mat_color: new Color3(1.0, 1.0, 1.0),
-            mat_texture: new Texture("/heightmaps/snow.jpg", scene),
+            mat_texture: new Texture(BASE_URL + "/heightmaps/snow.jpg", scene),
             mat_specular: new Color3(0.0, 0.0, 0.0),
             mat_shininess: 1,
             texture_scale: new Vector2(1.0, 1.0),
@@ -385,7 +387,7 @@ class Renderer {
         sphere.position = new Vector3(-3, 1.5, -6.0);
         sphere.metadata = {
             mat_color: new Color3(0.98, 0.98, 0.98),
-            mat_texture: new Texture("/heightmaps/ice_cream.jpg", scene),
+            mat_texture: new Texture(BASE_URL + "/heightmaps/ice_cream.jpg", scene),
             mat_specular: new Color3(0.8, 0.8, 0.8),
             mat_shininess: 2,
             texture_scale: new Vector2(2.0, 2.0)
@@ -397,7 +399,7 @@ class Renderer {
         box.position = new Vector3(-3, 0.2, -6.0);
         box.metadata = {
             mat_color: new Color3(1.0, 1.0, 1.0),
-            mat_texture: new Texture("/heightmaps/cone.jpg", scene),
+            mat_texture: new Texture(BASE_URL + "/heightmaps/cone.jpg", scene),
             mat_specular: new Color3(0.1, 0.1, 0.1),
             mat_shininess: 0.1,
             texture_scale: new Vector2(1.0, 1.0)
