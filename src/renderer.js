@@ -244,7 +244,7 @@ class Renderer {
             mat_color: new Color3(0.60, 0.65, 0.15),
             mat_texture: white_texture,
             mat_specular: new Color3(0.3, 0.2, 0.5),
-            mat_shininess: 3,
+            mat_shininess: 13,
             texture_scale: new Vector2(1.0, 1.0),
             height_scalar: 5.0
         }
@@ -252,11 +252,12 @@ class Renderer {
 
 
         // Create other models
-        let sphere = CreateSphere('sphere', { diameter: 1.5, segments: 22 }, scene);
-        sphere.position = new Vector3(-3, 1.5, -6.0);
+
+        let sphere = CreateSphere('sphere', { segments: 32 }, scene);
+        sphere.position = new Vector3(1.0, 0.5, 3.0);
         sphere.metadata = {
             mat_color: new Color3(0.60, 0.65, 0.0),
-            mat_texture: white_texture,
+            mat_texture: new Texture("/heightmaps/moon.jpg", scene),
             mat_specular: new Color3(0.8, 0.8, 0.8),
             mat_shininess: 2,
             texture_scale: new Vector2(1.0, 1.0)
@@ -265,8 +266,8 @@ class Renderer {
         current_scene.models.push(sphere);
 
 
-        let box = CreateCylinder('cylinder', { tessellation: 7, height: 2 }, scene);
-        box.position = new Vector3(-3, 0, -6.0);
+        let box = CreateCylinder('cylinder', { width: 2, height: 2, depth: 1 }, scene);
+        box.position = new Vector3(-1.0, 0.5, 2.0);
         box.metadata = {
             mat_color: new Color3(0.75, 0.75, 0.75),
             mat_texture: new Texture("/heightmaps/can.jpg", scene),
@@ -379,26 +380,26 @@ class Renderer {
         ground_mesh.material = materials['ground_' + this.shading_alg];
 
         // Create other models
-        let sphere = CreateSphere('sphere', { segments: 32 }, scene);
-        sphere.position = new Vector3(1.0, 0.5, 3.0);
+        
+        let sphere = CreateSphere('sphere', { diameter: 1.5, segments: 22 }, scene);
+        sphere.position = new Vector3(-3, 1.5, -6.0);
         sphere.metadata = {
-            mat_color: new Color3(0.10, 0.35, 0.88),
-            mat_texture: white_texture,
+            mat_color: new Color3(0.98, 0.98, 0.98),
+            mat_texture: new Texture("/heightmaps/ice_cream.jpg", scene),
             mat_specular: new Color3(0.8, 0.8, 0.8),
-            mat_shininess: 16,
+            mat_shininess: 2,
             texture_scale: new Vector2(2.0, 2.0)
         }
         sphere.material = materials['illum_' + this.shading_alg];
         current_scene.models.push(sphere);
 
-
-        let box = CreateBox('box', { width: 2, height: 1, depth: 1 }, scene);
-        box.position = new Vector3(-1.0, 0.5, 2.0);
+        let box = CreateCylinder("cone", {height: 2,diameterTop: 1.5, diameterBottom: 0}, scene);
+        box.position = new Vector3(-3, 0.2, -6.0);
         box.metadata = {
-            mat_color: new Color3(0.75, 0.15, 0.05),
-            mat_texture: new Texture("/heightmaps/wavy.png", scene),
-            mat_specular: new Color3(0.4, 0.4, 0.4),
-            mat_shininess: 4,
+            mat_color: new Color3(1.0, 1.0, 1.0),
+            mat_texture: new Texture("/heightmaps/cone.jpg", scene),
+            mat_specular: new Color3(0.1, 0.1, 0.1),
+            mat_shininess: 0.1,
             texture_scale: new Vector2(1.0, 1.0)
         }
         box.material = materials['illum_' + this.shading_alg];
